@@ -10,8 +10,8 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LegacyRouteImport } from './routes/$legacy'
 import { Route as CaraBermainRouteImport } from './routes/cara-bermain'
-import { Route as DiagnostikRouteImport } from './routes/diagnostik'
 import { Route as LencanaRouteImport } from './routes/lencana'
 import { Route as PetaRouteImport } from './routes/peta'
 import { Route as RefleksiRouteImport } from './routes/refleksi'
@@ -25,14 +25,14 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LegacyRoute = LegacyRouteImport.update({
+  id: '/$legacy',
+  path: '/$legacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CaraBermainRoute = CaraBermainRouteImport.update({
   id: '/cara-bermain',
   path: '/cara-bermain',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DiagnostikRoute = DiagnostikRouteImport.update({
-  id: '/diagnostik',
-  path: '/diagnostik',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LencanaRoute = LencanaRouteImport.update({
@@ -73,8 +73,8 @@ const TindakanIdRoute = TindakanIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/$legacy': typeof LegacyRoute
   '/cara-bermain': typeof CaraBermainRoute
-  '/diagnostik': typeof DiagnostikRoute
   '/lencana': typeof LencanaRoute
   '/peta': typeof PetaRoute
   '/refleksi': typeof RefleksiRoute
@@ -85,8 +85,8 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/$legacy': typeof LegacyRoute
   '/cara-bermain': typeof CaraBermainRoute
-  '/diagnostik': typeof DiagnostikRoute
   '/lencana': typeof LencanaRoute
   '/peta': typeof PetaRoute
   '/refleksi': typeof RefleksiRoute
@@ -98,8 +98,8 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/$legacy': typeof LegacyRoute
   '/cara-bermain': typeof CaraBermainRoute
-  '/diagnostik': typeof DiagnostikRoute
   '/lencana': typeof LencanaRoute
   '/peta': typeof PetaRoute
   '/refleksi': typeof RefleksiRoute
@@ -112,8 +112,8 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/$legacy'
     | '/cara-bermain'
-    | '/diagnostik'
     | '/lencana'
     | '/peta'
     | '/refleksi'
@@ -124,8 +124,8 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/$legacy'
     | '/cara-bermain'
-    | '/diagnostik'
     | '/lencana'
     | '/peta'
     | '/refleksi'
@@ -136,8 +136,8 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/$legacy'
     | '/cara-bermain'
-    | '/diagnostik'
     | '/lencana'
     | '/peta'
     | '/refleksi'
@@ -149,8 +149,8 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LegacyRoute: typeof LegacyRoute
   CaraBermainRoute: typeof CaraBermainRoute
-  DiagnostikRoute: typeof DiagnostikRoute
   LencanaRoute: typeof LencanaRoute
   PetaRoute: typeof PetaRoute
   RefleksiRoute: typeof RefleksiRoute
@@ -169,18 +169,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/$legacy': {
+      id: '/$legacy'
+      path: '/$legacy'
+      fullPath: '/$legacy'
+      preLoaderRoute: typeof LegacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/cara-bermain': {
       id: '/cara-bermain'
       path: '/cara-bermain'
       fullPath: '/cara-bermain'
       preLoaderRoute: typeof CaraBermainRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/diagnostik': {
-      id: '/diagnostik'
-      path: '/diagnostik'
-      fullPath: '/diagnostik'
-      preLoaderRoute: typeof DiagnostikRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lencana': {
@@ -237,8 +237,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LegacyRoute: LegacyRoute,
   CaraBermainRoute: CaraBermainRoute,
-  DiagnostikRoute: DiagnostikRoute,
   LencanaRoute: LencanaRoute,
   PetaRoute: PetaRoute,
   RefleksiRoute: RefleksiRoute,
