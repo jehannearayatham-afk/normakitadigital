@@ -11,3 +11,4 @@
 
 ## Architecture rules
 - Game content lives in `src/lib/cases.ts`, scoring in `src/lib/scoring.ts` (tested), progress in a localStorage store `src/lib/progress.ts`; pages read progress only via `useProgress()` so SSR never touches localStorage.
+- Preserve the legacy `/index` URL through a guarded dynamic route; reserved index filenames collide with the generated home route, and other unmatched segments must remain not found.
